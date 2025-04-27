@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/anilopchisak/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/anilopchisak/frontend-project-46/actions)",
   "type": "module",
-  "main": "index.js",
+  "main": "gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
