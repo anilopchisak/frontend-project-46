@@ -23,7 +23,7 @@ const genDiff = ([data1, data2]) => {
             result[key] = data2[key];
         }
     });
-    console.log(JSON.stringify(result));
+    console.log(result);
     return JSON.stringify(result);
 }
 

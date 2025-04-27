@@ -10,7 +10,6 @@ export default (paths) => {
             }))
         .map((file) => {
             const parsedFile = JSON.parse(file)
-            console.log(parsedFile);
             return parsedFile;
         });
     return parsed;
