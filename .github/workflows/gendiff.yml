@@ -5,14 +5,31 @@ name: gendiff
 
 on: push
 
+env:
+  CI: true
+
 jobs:
   build:
+  
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [20.x]
+    
     steps:
       - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm install
-      - run: make test
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          fetch-depth: 0
+      - run: make install
       - run: make lint
+      - run: make test
+      - run: make test-coverage
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
