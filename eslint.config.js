@@ -28,7 +28,10 @@ export default defineConfig([
       '**/*.{js,mjs,cjs}',
     ],
     languageOptions: {
-      globals: globals.node,
+      globals: {
+        ...globals.node,
+        ...globals.jest,
+      },
       parserOptions: {
         projectService: true,
         ecmaVersion: 'latest',

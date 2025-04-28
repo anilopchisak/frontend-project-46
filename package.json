@@ -5,7 +5,7 @@
   "type": "module",
   "main": "gendiff.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
