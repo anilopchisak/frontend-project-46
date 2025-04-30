@@ -1,15 +1,13 @@
-import * as fs from 'node:fs'
+import parsers from '../src/parsers.js'
+import path from 'node:path'
+import { readFile } from './readFile.js'
 
 export default (paths) => {
   const parsed = paths
-    .filter(path => path.split('.')[1] === 'json')
-    .map(path =>
-      fs.readFileSync(path, (err, data) => {
-        if (err) throw err
-        console.log(data)
-      }))
-    .map((file) => {
-      const parsedFile = JSON.parse(file)
+    .map((filePath) => {
+      const data = readFile(filePath)
+      const parse = parsers(path.extname(filePath))
+      const parsedFile = parse(data)
       return parsedFile
     })
   return parsed

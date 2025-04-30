@@ -1,30 +1,19 @@
-import { fileURLToPath } from 'url'
-import path from 'path'
-import fs from 'fs'
 import handleParse from '../src/handleParse.js'
 import genDiff from '../src/genDiff.js'
+import { readFile } from '../src/readFile.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', filename)
-
-const readFile = filename =>
-  JSON.stringify(JSON.parse(
-    fs.readFileSync(getFixturePath(filename), 'utf-8'),
-  ))
-
-describe('genDIff', () => {
+describe('genDiff', () => {
   test('Flat JSON files comparison', () => {
-    const filepath1 = getFixturePath('file1.json')
-    const filepath2 = getFixturePath('file2.json')
-
-    const parsed = handleParse([filepath1, filepath2])
+    const parsed = handleParse(['file1.json', 'file2.json'])
     const diff = genDiff(parsed)
+    const expected = readFile('expected.txt')
+    expect(diff).toEqual(expected)
+  })
 
-    const expected = readFile('expected.json')
-
+  test('Flat yaml files comparison', () => {
+    const parsed = handleParse(['file1.yml', 'file2.yaml'])
+    const diff = genDiff(parsed)
+    const expected = readFile('expected.txt')
     expect(diff).toEqual(expected)
   })
 })

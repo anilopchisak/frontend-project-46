@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
-import path from 'node:path'
 import handleParse from '../src/handleParse.js'
 import genDiff from '../src/genDiff.js'
 
@@ -12,9 +11,7 @@ program
   .argument('filepath2')
   .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2) => {
-    const newPath1 = path.resolve(filepath1)
-    const newPath2 = path.resolve(filepath2)
-    const parsed = handleParse([newPath1, newPath2])
+    const parsed = handleParse([filepath1, filepath2])
     genDiff(parsed)
   })
 
