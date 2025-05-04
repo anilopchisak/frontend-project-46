@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import formatStylish from '../src/stylish.js'
 import { DIFF_STATUS } from './consts.js'
 import createNode from './createNode.js'
 
