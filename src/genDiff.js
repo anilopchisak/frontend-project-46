@@ -50,7 +50,7 @@ const genDiff = ([data1, data2]) => {
   }
 
   iter(getCommonKeys(data1, data2), diffTree, data1, data2)
-  return formatStylish(diffTree)
+  return diffTree
 }
 
 export default genDiff

@@ -14,7 +14,7 @@ const genIndent = (depth, nodeType = DIFF_STATUS.UNCHANGED, spacesCount = 4) => 
   return indent > 0 ? ' '.repeat(depth * spacesCount - 2) + genSpecChar(nodeType) : ''
 }
 
-const formatStylish = (diffTree) => {
+const stylish = (diffTree) => {
   const iter = (nodes, depth = 1) => {
     const lines = nodes.map((node) => {
       switch (node.type) {
@@ -48,4 +48,4 @@ const formatStylish = (diffTree) => {
   return iter(diffTree)
 }
 
-export default formatStylish
+export default stylish

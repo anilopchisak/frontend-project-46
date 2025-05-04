@@ -11,4 +11,4 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=anilopchisak_frontend-project-46&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=anilopchisak_frontend-project-46)
 
 ### Аскинема работы пакета:
-[![asciicast](https://asciinema.org/a/gleDpnp8J8IX12fyxdmgnvi6x.svg)](https://asciinema.org/a/gleDpnp8J8IX12fyxdmgnvi6x)
+[![asciicast](https://asciinema.org/a/VMHDALmyQDctKu3AMDoUsiiCb.svg)](https://asciinema.org/a/VMHDALmyQDctKu3AMDoUsiiCb)
