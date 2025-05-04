@@ -25,8 +25,8 @@ const genDiff = ([data1, data2]) => {
         accumulator.push(createNode(key, DIFF_STATUS.REMOVED, obj1[key]))
       }
 
-      // if obj[key] is NOT an object
-      else if (!_.isObject(obj1[key])) {
+      // if one of obj[key] is NOT an object
+      else if (!_.isPlainObject(obj1[key]) || !_.isPlainObject(obj2[key])) {
         // updated
         if (obj1[key] !== obj2[key]) {
           accumulator.push(createNode(key, DIFF_STATUS.UPDATED, obj1[key], obj2[key]))
@@ -37,7 +37,7 @@ const genDiff = ([data1, data2]) => {
         }
       }
 
-      // if obj[key] is an object
+      // if both obj[key] are objects
       else {
         // create nested node with array of children nodes
         const nestedNode = createNode(key, DIFF_STATUS.NESTED)
