@@ -1,12 +1,11 @@
 import _ from 'lodash'
-import { DIFF_STATUS } from './consts.js'
+import { DIFF_STATUS } from '../utils/consts.js'
 import createNode from './createNode.js'
 
 const getCommonKeys = (data1, data2) => {
   const keys1 = Object.keys(data1)
   const keys2 = Object.keys(data2)
-  const keys = _.union(keys1, keys2).sort()
-  return keys
+  return _.union(keys1, keys2).sort()
 }
 
 const genDiff = ([data1, data2]) => {

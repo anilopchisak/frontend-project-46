@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
-import handleParse from '../src/handleParse.js'
-import genDiff from '../src/genDiff.js'
-import stylish from '../src/stylish.js'
+import interfaceGenDiff from '../src/interfaceGenDiff'
 
 const program = new Command()
 program
@@ -11,12 +9,9 @@ program
   .argument('filepath1')
   .argument('filepath2')
   .option('-f, --format [type]', 'output format', 'stylish')
-  .action((filepath1, filepath2) => {
-    const parsed = handleParse([filepath1, filepath2])
-    const diff = (genDiff(parsed))
+  .action((filepath1, filepath2, formatName = 'stylish') => {
+    const diff = interfaceGenDiff(filepath1, filepath2, formatName)
     console.log(diff)
-    const formattedDiff = stylish(diff)
-    console.log(formattedDiff)
   })
 
 program.parse()

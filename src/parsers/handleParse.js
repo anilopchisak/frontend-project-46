@@ -1,6 +1,6 @@
-import parsers from '../src/parsers.js'
+import parsers from './parsers.js'
 import path from 'node:path'
-import { readFile } from './readFile.js'
+import { readFile } from '../utils/readFile.js'
 
 export default (paths) => {
   const parsed = paths

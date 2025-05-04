@@ -1,4 +1,4 @@
-import { DIFF_STATUS } from './consts.js'
+import { DIFF_STATUS } from '../utils/consts.js'
 import _ from 'lodash'
 
 const genSpecChar = (type) => {

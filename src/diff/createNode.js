@@ -1,4 +1,4 @@
-import { DIFF_STATUS } from './consts.js'
+import { DIFF_STATUS } from '../utils/consts.js'
 
 const createNode = (key, type, value1 = undefined, value2 = undefined) => {
   switch (type) {
