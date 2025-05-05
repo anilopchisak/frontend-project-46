@@ -5,8 +5,11 @@ import * as fs from 'node:fs'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const getFixturePath = filename =>
-  path.join(__dirname, '..', '__fixtures__', filename)
+const getFixturePath = (filepath) => {
+  if (path.isAbsolute(filepath)) return filepath
+  else if (filepath.includes('__fixtures__')) return path.resolve(__dirname, '..', filepath)
+  return path.resolve(__dirname, '..', '__fixtures__', filepath)
+}
 
-export const readFile = filename =>
-  fs.readFileSync(getFixturePath(filename), 'utf-8')
+export const readFile = filepath =>
+  fs.readFileSync(getFixturePath(filepath), 'utf-8')
