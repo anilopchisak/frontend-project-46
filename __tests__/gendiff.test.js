@@ -1,5 +1,5 @@
 import interfaceGenDiff from '../src/interfaceGenDiff.js'
-import { readFile } from '../src/utils/readFile.js'
+import { readFile } from '../src/readFile.js'
 
 const expectedStylish = readFile('expected_stylish.txt')
 const expectedPlain = readFile('expected_plain.txt')
