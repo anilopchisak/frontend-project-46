@@ -4,5 +4,4 @@ export const DIFF_STATUS = {
   REMOVED: 'removed',
   UNCHANGED: 'unchanged',
   NESTED: 'nested',
-  DEFAULT: 'default',
 }
