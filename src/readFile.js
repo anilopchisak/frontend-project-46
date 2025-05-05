@@ -9,7 +9,4 @@ const getFixturePath = filename =>
   path.join(__dirname, '..', '__fixtures__', filename)
 
 export const readFile = filename =>
-  fs.readFileSync(getFixturePath(filename), 'utf-8', (err, data) => {
-    if (err) throw err
-    console.log(data)
-  })
+  fs.readFileSync(getFixturePath(filename), 'utf-8')
