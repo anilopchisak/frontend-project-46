@@ -6,5 +6,7 @@ export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
   const parsed = handleParse([filepath1, filepath2])
   const diff = (handleGenDiff(parsed))
   const formatter = iFormatter(formatName)
-  return formatter(diff)
+  const formattedDiff = formatter(diff)
+  console.log(formattedDiff)
+  return formattedDiff
 }
