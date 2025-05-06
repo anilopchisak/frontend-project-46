@@ -3,8 +3,8 @@ import { Command } from 'commander'
 import { fileURLToPath } from 'url'
 import genDiff from '../src/genDiff.js'
 
-const program = new Command()
-export const createCli = () => {
+export default function createCli() {
+  const program = new Command()
   program
     .description('Compares two configuration files and shows a difference.')
     .version('0.1.0')
