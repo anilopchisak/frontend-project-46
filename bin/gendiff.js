@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
+import { fileURLToPath } from 'url'
 import interfaceGenDiff from '../src/interfaceGenDiff.js'
 
 const program = new Command()
@@ -14,4 +15,6 @@ program
     console.log(diff)
   })
 
-program.parse()
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  program.parse()
+}
