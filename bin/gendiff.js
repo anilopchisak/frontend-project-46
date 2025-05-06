@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
+import { fileURLToPath } from 'url'
 import genDiff from '../src/genDiff.js'
 
 export default function createCli() {
@@ -18,4 +19,8 @@ export default function createCli() {
   return program
 }
 
-createCli().parse(process.argv)
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  createCli().parse()
+}
+else
+  createCli().parse(process.argv)
