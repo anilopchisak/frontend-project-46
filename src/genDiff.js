@@ -1,10 +1,10 @@
 import handleParse from './parsers/handleParse.js'
-import genDiff from './diff/genDiff.js'
+import handleGenDiff from './diff/handleGenDiff.js'
 import iFormatter from './formatters/index.js'
 
-export default (filepath1, filepath2, formatName = 'stylish') => {
+export default function genDiff(filepath1, filepath2, formatName = 'stylish') {
   const parsed = handleParse([filepath1, filepath2])
-  const diff = (genDiff(parsed))
+  const diff = (handleGenDiff(parsed))
   const formatter = iFormatter(formatName)
   return formatter(diff)
 }

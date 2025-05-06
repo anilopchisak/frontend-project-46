@@ -1,4 +1,4 @@
-import interfaceGenDiff from '../src/interfaceGenDiff.js'
+import genDiff from '../src/genDiff.js'
 import { readFile } from '../src/readFile.js'
 
 const expectedStylish = readFile('expected_stylish.txt')
@@ -14,15 +14,15 @@ const cases = [
 
 describe.each(cases)('genDiff', (filename1, filename2) => {
   test('stylish', () => {
-    const diff = interfaceGenDiff(filename1, filename2)
+    const diff = genDiff(filename1, filename2)
     expect(diff).toEqual(expectedStylish)
   })
   test('plain', () => {
-    const diff = interfaceGenDiff(filename1, filename2, 'plain')
+    const diff = genDiff(filename1, filename2, 'plain')
     expect(diff).toEqual(expectedPlain)
   })
   test('json', () => {
-    const diff = interfaceGenDiff(filename1, filename2, 'json')
+    const diff = genDiff(filename1, filename2, 'json')
     expect(diff).toEqual(expectedJson)
   })
 })

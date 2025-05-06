@@ -8,7 +8,7 @@ const getCommonKeys = (data1, data2) => {
   return _.union(keys1, keys2).sort()
 }
 
-const genDiff = ([data1, data2]) => {
+const handleGenDiff = ([data1, data2]) => {
   const diffTree = []
 
   const iter = (keys, accumulator, obj1, obj2, depth = 1) => {
@@ -51,4 +51,4 @@ const genDiff = ([data1, data2]) => {
   return diffTree
 }
 
-export default genDiff
+export default handleGenDiff

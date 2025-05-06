@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
 import { fileURLToPath } from 'url'
-import genDiff from '../src/interfaceGenDiff.js'
+import genDiff from '../src/genDiff.js'
 
 const program = new Command()
 export const createCli = () => {
