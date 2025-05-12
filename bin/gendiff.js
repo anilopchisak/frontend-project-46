@@ -22,5 +22,6 @@ export default function createCli() {
 if (fileURLToPath(import.meta.url) === process.argv[1]) {
   createCli().parse()
 }
-else
+else {
   createCli().parse(process.argv)
+}

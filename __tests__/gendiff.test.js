@@ -1,14 +1,14 @@
 // import { fileURLToPath } from 'url'
-// import path from 'node:path'
+import path from 'node:path'
 import genDiff from '../src/genDiff.js'
 import { readFile } from '../src/readFile.js'
 
 // const __filename = fileURLToPath(import.meta.url)
 // const __dirname = path.dirname(__filename)
 
-const expectedStylish = readFile('expected_stylish.txt')
-const expectedPlain = readFile('expected_plain.txt')
-const expectedJson = JSON.stringify(JSON.parse(readFile('expected_json.json')))
+const expectedStylish = readFile('expected_stylish.txt', '__fixtures__')
+const expectedPlain = readFile('expected_plain.txt', '__fixtures__')
+const expectedJson = JSON.stringify(JSON.parse(readFile('expected_json.json', '__fixtures__')))
 
 const cases = [
   ['file1.json', 'file2.json'],
@@ -19,15 +19,15 @@ const cases = [
 
 describe.each(cases)('genDiff', (filename1, filename2) => {
   test('stylish', () => {
-    const diff = genDiff(filename1, filename2)
+    const diff = genDiff(path.join('__fixtures__', filename1), path.join('__fixtures__', filename2))
     expect(diff).toEqual(expectedStylish)
   })
   test('plain', () => {
-    const diff = genDiff(filename1, filename2, 'plain')
+    const diff = genDiff(path.join('__fixtures__', filename1), path.join('__fixtures__', filename2), 'plain')
     expect(diff).toEqual(expectedPlain)
   })
   test('json', () => {
-    const diff = genDiff(filename1, filename2, 'json')
+    const diff = genDiff(path.join('__fixtures__', filename1), path.join('__fixtures__', filename2), 'json')
     expect(diff).toEqual(expectedJson)
   })
 })
