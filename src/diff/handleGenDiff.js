@@ -1,6 +1,5 @@
 import _ from 'lodash'
 import { DIFF_STATUS } from '../utils/consts.js'
-import createNode from './createNode.js'
 
 const getCommonKeys = (data1, data2) => {
   const keys1 = Object.keys(data1)
@@ -8,47 +7,50 @@ const getCommonKeys = (data1, data2) => {
   return _.union(keys1, keys2).sort()
 }
 
-const handleGenDiff = ([data1, data2]) => {
-  const diffTree = []
-
-  const iter = (keys, accumulator, obj1, obj2, depth = 1) => {
-    keys.forEach((key) => {
-      // if key added
-      if (!Object.hasOwn(obj1, key)) {
-        accumulator.push(createNode(key, DIFF_STATUS.ADDED, obj2[key]))
-      }
-
-      // if key deleted
-      else if (!Object.hasOwn(obj2, key)) {
-        accumulator.push(createNode(key, DIFF_STATUS.REMOVED, obj1[key]))
-      }
-
-      // if one of obj[key] is NOT an object
-      else if (!_.isPlainObject(obj1[key]) || !_.isPlainObject(obj2[key])) {
-        // updated
-        if (obj1[key] !== obj2[key]) {
-          accumulator.push(createNode(key, DIFF_STATUS.UPDATED, obj1[key], obj2[key]))
-        }
-        // unchanged
-        else {
-          accumulator.push(createNode(key, DIFF_STATUS.UNCHANGED, obj2[key]))
+const handleGenDiff = (data1, data2) => {
+  const iter = (keys, d1, d2) => {
+    const diff = keys.map((key) => {
+      if (!Object.hasOwn(d1, key)) {
+        return {
+          key: key,
+          type: DIFF_STATUS.ADDED,
+          value: d2[key],
         }
       }
-
-      // if both obj[key] are objects
+      else if (!Object.hasOwn(d2, key)) {
+        return {
+          key: key,
+          type: DIFF_STATUS.REMOVED,
+          value: d1[key],
+        }
+      }
+      else if (_.isPlainObject(d1[key]) && _.isPlainObject(d2[key])) {
+        return {
+          key: key,
+          type: DIFF_STATUS.NESTED,
+          children: iter(getCommonKeys(d1[key], d2[key]), d1[key], d2[key]),
+        }
+      }
+      else if (d1[key] !== d2[key]) {
+        return {
+          key: key,
+          type: DIFF_STATUS.UPDATED,
+          oldValue: d1[key],
+          newValue: d2[key],
+        }
+      }
       else {
-        // create nested node with array of children nodes
-        const nestedNode = createNode(key, DIFF_STATUS.NESTED)
-        // using mutation fill children array
-        iter(getCommonKeys(obj1[key], obj2[key]), nestedNode.children, obj1[key], obj2[key], depth + 1)
-        // fill output array with filled nested node
-        accumulator.push(nestedNode)
+        return {
+          key: key,
+          type: DIFF_STATUS.UNCHANGED,
+          value: d1[key],
+        }
       }
     })
+    return diff
   }
 
-  iter(getCommonKeys(data1, data2), diffTree, data1, data2)
-  return diffTree
+  return iter(getCommonKeys(data1, data2), data1, data2)
 }
 
 export default handleGenDiff
