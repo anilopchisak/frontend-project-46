@@ -1,11 +1,8 @@
-// import { fileURLToPath } from 'url'
 import path from 'path'
 import * as fs from 'node:fs'
 
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = path.dirname(__filename)
-
-export const readFile = (filepath) => {
-  if (!filepath.includes('\\')) return fs.readFileSync(path.resolve('__fixtures__', filepath), 'utf-8')
-  return fs.readFileSync(path.resolve(filepath), 'utf-8')
+export const readFile = (filepath, dir = process.cwd()) => {
+  const hasDirectory = filepath.includes('/') || filepath.includes('\\')
+  const formattedPath = hasDirectory ? filepath : path.join('__fixtures__', filepath)
+  return fs.readFileSync(path.resolve(dir, formattedPath), 'utf-8')
 }

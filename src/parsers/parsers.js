@@ -9,7 +9,7 @@ const parsers = {
 export default (format) => {
   const parse = parsers[format]
   if (!parse) {
-    throw new Error(`Unsupported format: ${format}`)
+    throw new Error(`Unsupported format: ${format}. Try .json, .yml or .yaml.`)
   }
   return parse
 }

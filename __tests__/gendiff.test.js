@@ -1,5 +1,10 @@
+// import { fileURLToPath } from 'url'
+// import path from 'node:path'
 import genDiff from '../src/genDiff.js'
 import { readFile } from '../src/readFile.js'
+
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
 
 const expectedStylish = readFile('expected_stylish.txt')
 const expectedPlain = readFile('expected_plain.txt')
