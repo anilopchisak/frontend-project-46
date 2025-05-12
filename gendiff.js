@@ -17,5 +17,3 @@ export default function createCli() {
     })
   return program
 }
-
-createCli().parse()
