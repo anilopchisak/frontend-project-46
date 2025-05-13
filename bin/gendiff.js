@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
-import genDiff from './src/genDiff.js'
+import genDiff from '../src/genDiff.js'
 
 export default function createCli() {
   const program = new Command()
@@ -17,3 +17,5 @@ export default function createCli() {
     })
   return program
 }
+
+createCli().parse()
