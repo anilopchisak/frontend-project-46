@@ -1,4 +1,4 @@
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import genDiff from '../src/genDiff.js'
 import { readFile } from '../src/readFile.js'
