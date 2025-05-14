@@ -1,16 +1,16 @@
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+import * as fs from 'node:fs'
 import genDiff from '../src/genDiff.js'
-import { readFile } from '../src/readFile.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const fixturesPath = path.join(__dirname, '..', '__fixtures__')
 
-const expectedStylish = readFile('expected_stylish.txt', fixturesPath)
-const expectedPlain = readFile('expected_plain.txt', fixturesPath)
-const expectedJson = JSON.stringify(JSON.parse(readFile('expected_json.json', fixturesPath)))
+const expectedStylish = fs.readFileSync(path.resolve(fixturesPath, 'expected_stylish.txt'), 'utf-8')
+const expectedPlain = fs.readFileSync(path.resolve(fixturesPath, 'expected_plain.txt'), 'utf-8')
+const expectedJson = JSON.stringify(JSON.parse(fs.readFileSync(path.resolve(fixturesPath, 'expected_json.json'), 'utf-8')))
 
 const pairs = [
   ['file1.json', 'file2.json'],
