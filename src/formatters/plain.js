@@ -1,6 +1,12 @@
 import { DIFF_STATUS } from '../utils/consts.js'
 import _ from 'lodash'
 
+const formatValue = (value) => {
+  if (_.isPlainObject(value)) return `[complex value]`
+  else if (typeof value === 'string') return `'${value}'`
+  return value
+}
+
 export default (diff) => {
   const iter = (nodes, depthStr = '') => {
     const lines = nodes.map((node) => {
@@ -24,12 +30,6 @@ export default (diff) => {
     })
 
     return _.union(lines.flat())
-  }
-
-  const formatValue = (value) => {
-    if (_.isPlainObject(value)) return `[complex value]`
-    else if (typeof value === 'string') return `'${value}'`
-    return value
   }
 
   return iter(diff).filter(item => !_.isNil(item)).join('\n')

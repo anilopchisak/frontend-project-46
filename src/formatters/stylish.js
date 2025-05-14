@@ -14,6 +14,16 @@ const genIndent = (depth, nodeType = DIFF_STATUS.UNCHANGED, spacesCount = 4) => 
   return indent > 0 ? ' '.repeat(depth * spacesCount - 2) + genSpecChar(nodeType) : ''
 }
 
+const formatValue = (value, depth) => {
+  if (_.isPlainObject(value)) {
+    const lines = Object.entries(value).map(([key, val]) => {
+      return `${genIndent(depth + 1)}${key}: ${formatValue(val, depth + 1)}`
+    })
+    return `{\n${lines.join('\n')}\n${genIndent(depth)}}`
+  }
+  return value
+}
+
 const stylish = (diffTree) => {
   const iter = (nodes, depth = 1) => {
     const lines = nodes.map((node) => {
@@ -33,16 +43,6 @@ const stylish = (diffTree) => {
     })
 
     return `{\n${lines.join('\n')}\n${genIndent(depth - 1)}}`
-  }
-
-  const formatValue = (value, depth) => {
-    if (_.isPlainObject(value)) {
-      const lines = Object.entries(value).map(([key, val]) => {
-        return `${genIndent(depth + 1)}${key}: ${formatValue(val, depth + 1)}`
-      })
-      return `{\n${lines.join('\n')}\n${genIndent(depth)}}`
-    }
-    return value
   }
 
   return iter(diffTree)
