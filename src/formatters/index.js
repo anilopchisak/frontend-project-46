@@ -13,6 +13,6 @@ export default (formatName) => {
     case ('json'): {
       return json
     }
-    default: throw new Error(`No such formatter.\nTry one of available formatters: stylish, plain or json\n\n`)
+    default: throw new Error(`No such formatter: ${formatName}.\nTry one of available formatters: stylish, plain or json\n\n`)
   }
 }
